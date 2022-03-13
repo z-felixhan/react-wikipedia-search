@@ -2,11 +2,13 @@ import { useState } from "react";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [searchTime, setSearchTime] = useState("");
   const [results, setResults] = useState([]);
   const [searchInfo, setSearchInfo] = useState({});
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    const startDate = new Date();
 
     if (search === "") return;
 
@@ -22,6 +24,9 @@ function App() {
 
     setResults(data.query.search);
     setSearchInfo(data.query.searchinfo);
+
+    const endDate = new Date();
+    setSearchTime((endDate.getTime() - startDate.getTime()) / 1000);
   };
 
   return (
@@ -36,7 +41,13 @@ function App() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </form>
-        {searchInfo.totalhits ? <p>Results: {searchInfo.totalhits}</p> : ""}
+        {searchInfo.totalhits ? (
+          <p>
+            Results: {searchInfo.totalhits} ({searchTime}s)
+          </p>
+        ) : (
+          ""
+        )}
       </header>
       <div className="results">
         {results.map((result, index) => {
