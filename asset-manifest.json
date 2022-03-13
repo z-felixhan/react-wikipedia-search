@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-wikipedia-search/static/css/main.f063a9de.css",
+    "main.js": "/react-wikipedia-search/static/js/main.d62f992f.js",
+    "static/js/787.7037c57f.chunk.js": "/react-wikipedia-search/static/js/787.7037c57f.chunk.js",
+    "index.html": "/react-wikipedia-search/index.html",
+    "main.f063a9de.css.map": "/react-wikipedia-search/static/css/main.f063a9de.css.map",
+    "main.d62f992f.js.map": "/react-wikipedia-search/static/js/main.d62f992f.js.map",
+    "787.7037c57f.chunk.js.map": "/react-wikipedia-search/static/js/787.7037c57f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f063a9de.css",
+    "static/js/main.d62f992f.js"
+  ]
+}
