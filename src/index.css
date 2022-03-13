@@ -57,6 +57,11 @@ h1 {
   margin-bottom: 0.75rem;
 }
 
+.result p .searchmatch {
+  color: rgb(0, 119, 255);
+  font-weight: 700;
+}
+
 .result a {
   display: inline-block;
   padding: 0.75rem 1rem;
