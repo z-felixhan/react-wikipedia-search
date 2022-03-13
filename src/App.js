@@ -1,23 +1,59 @@
+import { useState } from "react";
+
 function App() {
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+  const [searchInfo, setSearchInfo] = useState({});
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+
+    if (search === "") return;
+
+    const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${search}`;
+
+    const response = await fetch(endpoint);
+
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+
+    const data = await response.json();
+
+    setResults(data.query.search);
+    setSearchInfo(data.query.searchinfo);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Wiki Search</h1>
-        <form className="search-box">
-          <input type="search" placeholder="Search Wiki" />
+        <form className="search-box" onSubmit={handleSearch}>
+          <input
+            type="search"
+            placeholder="Search Wiki"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </form>
-        <p>Results</p>
+        {searchInfo.totalhits ? <p>Results: {searchInfo.totalhits}</p> : ""}
       </header>
       <div className="results">
-        <div className="result">
-          <h3>Result Title</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente
-            voluptate soluta quae totam vel fuga numquam molestias at
-            exercitationem quasi.
-          </p>
-          <a href="#">Read More</a>
-        </div>
+        {results.map((result, index) => {
+          const url = `https://en.wikipedia.org/?curid=${result.pageid}`;
+
+          return (
+            <div className="result" key={index}>
+              <h3>{result.title}</h3>
+              <p
+                dangerouslySetInnerHTML={{ __html: result.snippet + "..." }}
+              ></p>
+              <a href={url} target="_blank" rel="noreferrer">
+                Read More
+              </a>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
