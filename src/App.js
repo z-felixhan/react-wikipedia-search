@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CgExternal } from "react-icons/cg";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -60,7 +61,7 @@ function App() {
                 dangerouslySetInnerHTML={{ __html: result.snippet + "..." }}
               ></p>
               <a href={url} target="_blank" rel="noreferrer">
-                Read More
+                Read More <CgExternal />
               </a>
             </div>
           );
